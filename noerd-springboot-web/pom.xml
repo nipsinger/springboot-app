@@ -3,31 +3,34 @@
   <parent>
     <groupId>at.noerd</groupId>
     <artifactId>noerd-springboot-parent</artifactId>
-    <version>${project.version}</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>noerd-springboot-web</artifactId>
   
   <dependencies>
-		<dependency>
+  	<dependency>
+  		<groupId>at.noerd</groupId>
+  		<artifactId>noerd-springboot-bom</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+
+
+  	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>${spring-boot.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>${spring-boot.version}</version>
 		</dependency>
 	</dependencies>
   
