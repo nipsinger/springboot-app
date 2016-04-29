@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@PropertySource("classpath*:soccerapi.properties}")
+@PropertySource("classpath:config/soccerapi.properties")
 public class ExternalConfig {
 	
 	@Bean
