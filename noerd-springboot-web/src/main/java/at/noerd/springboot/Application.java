@@ -1,26 +1,28 @@
 package at.noerd.springboot;
 
-import java.util.Arrays;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.web.client.RestTemplate;
+
+import at.noerd.springboot.bom.Team;
 
 @SpringBootApplication
-public class Application {
+public class Application implements CommandLineRunner {
 
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
+	
     public static void main(String[] args) {
-        ApplicationContext ctx = SpringApplication.run(Application.class, args);
-
-        System.out.println("Let's inspect the beans provided by Spring Boot:");
-
-        String[] beanNames = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String beanName : beanNames) {
-            System.out.println(beanName);
-        }
-        
-        System.out.println();
+        SpringApplication.run(Application.class);
+    }
+    
+    @Override
+    public void run(String... args) throws Exception {
+        RestTemplate restTemplate = new RestTemplate();
+        Team team = restTemplate.getForObject("http://api.football-data.org/v1/teams/811", Team.class);
+        log.info(team.toString());
     }
 
 }
