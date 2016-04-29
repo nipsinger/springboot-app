@@ -1,4 +1,4 @@
-package at.noerd.springboot.bom;
+package at.noerd.sports.domain;
 
 public enum Status {
 	TIMED, FINISHED

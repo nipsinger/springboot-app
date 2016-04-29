@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>at.noerd</groupId>
-		<artifactId>noerd-springboot-parent</artifactId>
+		<artifactId>noerd-sports-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>noerd-springboot-bom</artifactId>
+	<artifactId>noerd-sports-domain</artifactId>
 
 	<dependencies>
 		<dependency>

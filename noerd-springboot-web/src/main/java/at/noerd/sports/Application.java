@@ -1,18 +1,24 @@
-package at.noerd.springboot;
+package at.noerd.sports;
+
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.client.RestTemplate;
 
-import at.noerd.springboot.bom.Team;
+import at.noerd.sports.api.SoccerService;
+import at.noerd.sports.domain.League;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+	
+	@Autowired
+	private SoccerService soccerService;
 	
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
@@ -20,9 +26,8 @@ public class Application implements CommandLineRunner {
     
     @Override
     public void run(String... args) throws Exception {
-        RestTemplate restTemplate = new RestTemplate();
-        Team team = restTemplate.getForObject("http://api.football-data.org/v1/teams/811", Team.class);
-        log.info(team.toString());
+        List<League> allLeagues = soccerService.getAllLeagues();
+        LOGGER.debug(allLeagues.toString());
     }
 
 }

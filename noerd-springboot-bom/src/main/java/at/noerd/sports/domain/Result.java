@@ -1,8 +1,10 @@
-package at.noerd.springboot.bom;
+package at.noerd.sports.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
 	private int goalsHomeTeam;
 	

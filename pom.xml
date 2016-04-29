@@ -2,15 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>at.noerd</groupId>
-	<artifactId>noerd-springboot-parent</artifactId>
+	<artifactId>noerd-sports-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Springboot Parent</name>
+	<name>Noerd Sports</name>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>noerd-springboot-web</module>
-		<module>noerd-springboot-service</module>
-		<module>noerd-springboot-bom</module>
+		<module>noerd-sports-web</module>
+		<module>noerd-sports-service</module>
+		<module>noerd-sports-domain</module>
+		<module>noerd-sports-external</module>
 	</modules>
 
 	<properties>
@@ -50,6 +51,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-actuator</artifactId>
 				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>joda-time</groupId>

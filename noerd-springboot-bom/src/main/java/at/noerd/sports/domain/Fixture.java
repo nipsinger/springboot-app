@@ -1,4 +1,4 @@
-package at.noerd.springboot.bom;
+package at.noerd.sports.domain;
 
 import java.util.List;
 
@@ -6,9 +6,11 @@ import javax.xml.transform.Result;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Fixture {
 
 	private List<Link> _links;

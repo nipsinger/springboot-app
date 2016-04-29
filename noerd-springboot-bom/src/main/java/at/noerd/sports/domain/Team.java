@@ -1,4 +1,4 @@
-package at.noerd.springboot.bom;
+package at.noerd.sports.domain;
 
 import java.math.BigDecimal;
 
@@ -8,11 +8,20 @@ import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Team {
+	private int id;
 	private String name;
 	private String code;
 	private String shortName;
 	private BigDecimal squadMarketValue;
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -49,7 +58,8 @@ public class Team {
 		
 		final Team other = (Team) obj;
 		
-		return Objects.equal(this.name, other.name)
+		return Objects.equal(this.id, other.id)
+			&& Objects.equal(this.name, other.name)
 			&& Objects.equal(this.code, other.code)
 			&& Objects.equal(this.shortName, other.shortName)
 			&& Objects.equal(this.squadMarketValue, other.squadMarketValue);

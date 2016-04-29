@@ -1,4 +1,4 @@
-package at.noerd.springboot.controller;
+package at.noerd.sports.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
