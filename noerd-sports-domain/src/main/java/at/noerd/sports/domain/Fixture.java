@@ -1,9 +1,5 @@
 package at.noerd.sports.domain;
 
-import java.util.List;
-
-import javax.xml.transform.Result;
-
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -13,19 +9,13 @@ import com.google.common.base.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Fixture {
 
-	private List<Link> _links;
 	private DateTime date;
 	private Status status;
 	private int matchday;
-	private Team homeTeam;
-	private Team awayTeam;
+	private String homeTeamName;
+	private String awayTeamName;
 	private Result result;
-	public List<Link> get_links() {
-		return _links;
-	}
-	public void set_links(List<Link> _links) {
-		this._links = _links;
-	}
+
 	public DateTime getDate() {
 		return date;
 	}
@@ -44,25 +34,25 @@ public class Fixture {
 	public void setMatchday(int matchday) {
 		this.matchday = matchday;
 	}
-	public Team getHomeTeam() {
-		return homeTeam;
+	public String getHomeTeamName() {
+		return homeTeamName;
 	}
-	public void setHomeTeam(Team homeTeam) {
-		this.homeTeam = homeTeam;
+	public void setHomeTeamName(String homeTeamName) {
+		this.homeTeamName = homeTeamName;
 	}
-	public Team getAwayTeam() {
-		return awayTeam;
+	public String getAwayTeamName() {
+		return awayTeamName;
 	}
-	public void setAwayTeam(Team awayTeam) {
-		this.awayTeam = awayTeam;
+	public void setAwayTeamName(String awayTeamName) {
+		this.awayTeamName = awayTeamName;
 	}
+	
 	public Result getResult() {
 		return result;
 	}
 	public void setResult(Result result) {
 		this.result = result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)  
@@ -76,23 +66,21 @@ public class Fixture {
 	      
 	      final Fixture other = (Fixture) obj;
 	      
-	      return Objects.equal(this._links, other._links)
-	          && Objects.equal(this.date, other.date)
+	      return Objects.equal(this.date, other.date)
 	          && Objects.equal(this.status, other.status)
 	          && Objects.equal(this.matchday, other.matchday)
-	          && Objects.equal(this.homeTeam, other.homeTeam)
-	          && Objects.equal(this.awayTeam, other.awayTeam)
+	          && Objects.equal(this.homeTeamName, other.homeTeamName)
+	          && Objects.equal(this.awayTeamName, other.awayTeamName)
 	          && Objects.equal(this.result, other.result);
 	}
 	
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this.getClass()).add("_links", _links)
-				.add("date", date)
+		return MoreObjects.toStringHelper(this.getClass()).add("date", date)
 				.add("status", status)
 				.add("matchday", matchday)
-				.add("homeTeam", homeTeam)
-				.add("awayTeam", awayTeam)
+				.add("homeTeamName", homeTeamName)
+				.add("awayTeamName", awayTeamName)
 				.add("result", result).toString();
 	}
 }

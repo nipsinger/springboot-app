@@ -1,5 +1,6 @@
 package at.noerd.sports.config;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,7 +16,9 @@ import org.springframework.web.client.RestTemplate;
 import at.noerd.sports.api.SoccerService;
 import at.noerd.sports.domain.League;
 import at.noerd.sports.domain.Team;
+import at.noerd.sports.domain.dto.FixturesDTO;
 import at.noerd.sports.domain.dto.RankingDTO;
+import at.noerd.sports.interceptors.ApiKeyInterceptor;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "at.noerd.sports")
@@ -44,10 +47,19 @@ public class WebConfig implements CommandLineRunner {
 		
 		RankingDTO matchdayRanking = soccerService.getRankingForLeagueAndMatchday(league, 20);
 		LOGGER.debug(matchdayRanking.getStanding().toString());
+		
+		FixturesDTO fixtures = soccerService.getFixturesForLeague(league);
+		LOGGER.debug(fixtures.getFixtures().toString());
+		
+		FixturesDTO matchdayFixtures = soccerService.getFixturesForLeagueAndMatchday(league, 34);
+		LOGGER.debug(matchdayFixtures.getFixtures().toString());
 	}
 
 	@Bean
 	public RestTemplate restTemplate() {
-		return new RestTemplate();
+		RestTemplate restTemplate =  new RestTemplate();
+		restTemplate.setInterceptors(Collections.singletonList(new ApiKeyInterceptor()));
+		return restTemplate;
 	}
+	
 }

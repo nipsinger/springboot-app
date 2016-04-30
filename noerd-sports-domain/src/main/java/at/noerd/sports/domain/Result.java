@@ -6,19 +6,19 @@ import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
-	private int goalsHomeTeam;
+	private String goalsHomeTeam = "";
 	
-	private int goalsAwayTeam;
-	public int getGoalsHomeTeam() {
+	private String goalsAwayTeam = "";
+	public String getGoalsHomeTeam() {
 		return goalsHomeTeam;
 	}
-	public void setGoalsHomeTeam(int goalsHomeTeam) {
+	public void setGoalsHomeTeam(String goalsHomeTeam) {
 		this.goalsHomeTeam = goalsHomeTeam;
 	}
-	public int getGoalsAwayTeam() {
+	public String getGoalsAwayTeam() {
 		return goalsAwayTeam;
 	}
-	public void setGoalsAwayTeam(int goalsAwayTeam) {
+	public void setGoalsAwayTeam(String goalsAwayTeam) {
 		this.goalsAwayTeam = goalsAwayTeam;
 	}
 	@Override

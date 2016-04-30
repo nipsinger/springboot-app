@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import at.noerd.sports.domain.League;
 import at.noerd.sports.domain.Team;
+import at.noerd.sports.domain.dto.FixturesDTO;
 import at.noerd.sports.domain.dto.RankingDTO;
 import at.noerd.sports.domain.dto.TeamsDTO;
 
@@ -75,6 +76,20 @@ public class SoccerServiceImpl implements SoccerService {
 		return restTemplate.getForObject(baseUrl, RankingDTO.class);
 	}
 	
+	@Override
+	public FixturesDTO getFixturesForLeague(League league) {
+		baseUrl = getUrlForFixtures(String.valueOf(league.getId()));
+		LOGGER.debug(baseUrl);
+		return restTemplate.getForObject(baseUrl, FixturesDTO.class);
+	}
+	
+	@Override
+	public FixturesDTO getFixturesForLeagueAndMatchday(League league, int matchday) {
+		baseUrl = getUrlForFixtures(String.valueOf(league.getId())) + "?matchday=" + matchday;
+		LOGGER.debug(baseUrl);
+		return restTemplate.getForObject(baseUrl, FixturesDTO.class);
+	}
+	
 	private String getUrl(String inBetweenValue) {
 		StringBuilder builder = new StringBuilder();
 
@@ -90,4 +105,11 @@ public class SoccerServiceImpl implements SoccerService {
 	
 	}
 
+	private String getUrlForFixtures(String inBetweenValue) {
+		StringBuilder builder = new StringBuilder();
+
+		return builder.append(env.getProperty("baseurl")).append(env.getProperty("seasons")).append("/")
+				.append(inBetweenValue).append(env.getProperty("fixtures")).toString();
+	
+	}
 }
