@@ -23,6 +23,8 @@ public class SoccerServiceImpl implements SoccerService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SoccerServiceImpl.class);
 
+	private final AbstractApiConsumer<League> leagueConsumer;
+	
 	@Autowired
 	private Environment env;
 	@Autowired
@@ -30,7 +32,9 @@ public class SoccerServiceImpl implements SoccerService {
 
 	private String baseUrl;
 
-	public SoccerServiceImpl() {
+	@Autowired
+	public SoccerServiceImpl(AbstractApiConsumer<League> leagueConsumer) {
+		this.leagueConsumer = leagueConsumer;
 		LOGGER.debug("Instantiated SoccerServiceImpl");
 	}
 
@@ -49,9 +53,13 @@ public class SoccerServiceImpl implements SoccerService {
 
 	@Override
 	public League getLeague(int id) {
-		baseUrl = env.getProperty("baseurl") + env.getProperty("seasons") + id;
-		LOGGER.debug(baseUrl);
-		return restTemplate.getForObject(baseUrl, League.class);
+		
+//		baseUrl = env.getProperty("baseurl") + env.getProperty("seasons") + id;
+//		LOGGER.debug(baseUrl);
+//		return restTemplate.getForObject(baseUrl, League.class);
+	
+		return leagueConsumer.consume();
+	
 	}
 
 	@Override

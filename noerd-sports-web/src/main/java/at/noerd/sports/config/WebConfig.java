@@ -1,7 +1,6 @@
 package at.noerd.sports.config;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import at.noerd.sports.api.SoccerService;
 import at.noerd.sports.domain.League;
-import at.noerd.sports.domain.Team;
-import at.noerd.sports.domain.dto.FixturesDTO;
-import at.noerd.sports.domain.dto.RankingDTO;
 import at.noerd.sports.interceptors.ApiKeyInterceptor;
 
 @SpringBootApplication
@@ -26,33 +22,36 @@ import at.noerd.sports.interceptors.ApiKeyInterceptor;
 public class WebConfig implements CommandLineRunner {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebConfig.class);
-
+	
 	@Autowired
 	private SoccerService soccerService;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		List<League> allLeagues = soccerService.getAllLeagues();
-		LOGGER.debug(allLeagues.toString());
-
 		League league = soccerService.getLeague(395);
 		LOGGER.debug(league.toString());
-
-		List<Team> teams = soccerService.getAllTeamsForLeague(league);
-		LOGGER.debug(teams.toString());
 		
-		RankingDTO ranking = soccerService.getRankingForLeague(league);
-		LOGGER.debug(ranking.getStanding().toString());
-		
-		RankingDTO matchdayRanking = soccerService.getRankingForLeagueAndMatchday(league, 20);
-		LOGGER.debug(matchdayRanking.getStanding().toString());
-		
-		FixturesDTO fixtures = soccerService.getFixturesForLeague(league);
-		LOGGER.debug(fixtures.getFixtures().toString());
-		
-		FixturesDTO matchdayFixtures = soccerService.getFixturesForLeagueAndMatchday(league, 34);
-		LOGGER.debug(matchdayFixtures.getFixtures().toString());
+//		List<League> allLeagues = soccerService.getAllLeagues();
+//		LOGGER.debug(allLeagues.toString());
+//
+//		League league = soccerService.getLeague(395);
+//		LOGGER.debug(league.toString());
+//
+//		List<Team> teams = soccerService.getAllTeamsForLeague(league);
+//		LOGGER.debug(teams.toString());
+//		
+//		RankingDTO ranking = soccerService.getRankingForLeague(league);
+//		LOGGER.debug(ranking.getStanding().toString());
+//		
+//		RankingDTO matchdayRanking = soccerService.getRankingForLeagueAndMatchday(league, 20);
+//		LOGGER.debug(matchdayRanking.getStanding().toString());
+//		
+//		FixturesDTO fixtures = soccerService.getFixturesForLeague(league);
+//		LOGGER.debug(fixtures.getFixtures().toString());
+//		
+//		FixturesDTO matchdayFixtures = soccerService.getFixturesForLeagueAndMatchday(league, 34);
+//		LOGGER.debug(matchdayFixtures.getFixtures().toString());
 	}
 
 	@Bean
