@@ -13,12 +13,6 @@
   		<artifactId>noerd-sports-domain</artifactId>
   		<version>${project.parent.version}</version>
   	</dependency>
-  	<dependency>
-  		<groupId>at.noerd</groupId>
-  		<artifactId>noerd-sports-external</artifactId>
-  		<version>${project.parent.version}</version>
-  	</dependency>
-	
 	
   	<dependency>
 			<groupId>org.springframework.boot</groupId>
