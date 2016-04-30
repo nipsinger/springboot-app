@@ -1,7 +1,5 @@
 package at.noerd.sports.domain;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -12,9 +10,7 @@ public class Team {
 	private String name;
 	private String code;
 	private String shortName;
-	private BigDecimal squadMarketValue;
-	
-	
+	private String squadMarketValue;
 	
 	public int getId() {
 		return id;
@@ -40,10 +36,10 @@ public class Team {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-	public BigDecimal getSquadMarketValue() {
+	public String getSquadMarketValue() {
 		return squadMarketValue;
 	}
-	public void setSquadMarketValue(BigDecimal squadMarketValue) {
+	public void setSquadMarketValue(String squadMarketValue) {
 		this.squadMarketValue = squadMarketValue;
 	}
 	
