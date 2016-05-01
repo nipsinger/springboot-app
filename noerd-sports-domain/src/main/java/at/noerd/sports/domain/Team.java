@@ -1,21 +1,27 @@
 package at.noerd.sports.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document
 public class Team {
-	private int id;
+	
+	@Id
+	private String id;
 	private String name;
 	private String code;
 	private String shortName;
 	private String squadMarketValue;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

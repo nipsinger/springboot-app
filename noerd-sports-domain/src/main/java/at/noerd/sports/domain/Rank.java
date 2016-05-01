@@ -1,12 +1,18 @@
 package at.noerd.sports.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document
 public class Rank {
+	@Id
+	private String id;
 	@JsonProperty(value = "position")
 	private int rank;
 	@JsonProperty(value = "teamName")
@@ -23,6 +29,12 @@ public class Rank {
 	private RankStatistic home;
 	private RankStatistic away;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getRank() {
 		return rank;
 	}
@@ -112,7 +124,8 @@ public class Rank {
 	      final Rank other = (Rank) obj;
 	      
 	      return Objects.equal(this.rank, other.rank)
-	          && Objects.equal(this.team, other.team)
+	          && Objects.equal(this.id, other.id)
+	    	  && Objects.equal(this.team, other.team)
 	          && Objects.equal(this.playedGames, other.playedGames)
 	          && Objects.equal(this.points, other.points)
 	          && Objects.equal(this.goalsFor, other.goalsFor)
@@ -127,7 +140,8 @@ public class Rank {
 	
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this.getClass()).add("rank", rank)
+		return MoreObjects.toStringHelper(this.getClass()).add("id", id)
+				.add("rank", rank)
 				.add("team", team)
 				.add("playedGames", playedGames)
 				.add("points", points)

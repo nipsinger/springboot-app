@@ -2,11 +2,11 @@ package at.noerd.sports.api;
 
 import org.springframework.stereotype.Service;
 
-import at.noerd.sports.domain.League;
+import at.noerd.sports.domain.dto.LeaguesDTO;
 
 @Service
-final class LeagueApiConsumer extends AbstractApiConsumer<League> {
+final class LeagueApiConsumer extends AbstractApiConsumer<LeaguesDTO> {
 	public LeagueApiConsumer() {
-		super(League.class, "soccerseasons/395");
+		super(LeaguesDTO.class, "soccerseasons");
 	}
 }	

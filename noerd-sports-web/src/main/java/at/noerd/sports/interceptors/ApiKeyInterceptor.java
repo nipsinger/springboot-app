@@ -9,7 +9,7 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
 public class ApiKeyInterceptor implements ClientHttpRequestInterceptor {
-
+	
     @Override
     public ClientHttpResponse intercept(
             HttpRequest request, byte[] body, ClientHttpRequestExecution execution)

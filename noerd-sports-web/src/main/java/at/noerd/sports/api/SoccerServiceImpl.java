@@ -3,6 +3,7 @@ package at.noerd.sports.api;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import at.noerd.sports.domain.League;
 import at.noerd.sports.domain.Team;
 import at.noerd.sports.domain.dto.FixturesDTO;
+import at.noerd.sports.domain.dto.LeaguesDTO;
 import at.noerd.sports.domain.dto.RankingDTO;
 import at.noerd.sports.domain.dto.TeamsDTO;
 
@@ -23,7 +25,7 @@ public class SoccerServiceImpl implements SoccerService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SoccerServiceImpl.class);
 
-	private final AbstractApiConsumer<League> leagueConsumer;
+	private final AbstractApiConsumer<LeaguesDTO> leagueConsumer;
 	
 	@Autowired
 	private Environment env;
@@ -33,7 +35,7 @@ public class SoccerServiceImpl implements SoccerService {
 	private String baseUrl;
 
 	@Autowired
-	public SoccerServiceImpl(AbstractApiConsumer<League> leagueConsumer) {
+	public SoccerServiceImpl(AbstractApiConsumer<LeaguesDTO> leagueConsumer) {
 		this.leagueConsumer = leagueConsumer;
 		LOGGER.debug("Instantiated SoccerServiceImpl");
 	}
@@ -48,18 +50,26 @@ public class SoccerServiceImpl implements SoccerService {
 		allLeagues = Arrays.asList(leagues.getBody());
 
 		LOGGER.debug("Retrieving all leagues: " + allLeagues.toString());
+		
 		return allLeagues;
 	}
 
 	@Override
-	public League getLeague(int id) {
+	public League getLeague(String id) {
 		
 //		baseUrl = env.getProperty("baseurl") + env.getProperty("seasons") + id;
 //		LOGGER.debug(baseUrl);
 //		return restTemplate.getForObject(baseUrl, League.class);
 	
-		return leagueConsumer.consume();
-	
+		List<League> league = leagueConsumer.consume().getLeagues().stream()
+				.filter(l -> l.getId() == id)
+				.collect(Collectors.toList());
+		
+		if(league.size() != 1) {
+			throw new IllegalStateException("List should only contain ONE element.");
+		}
+		
+		return league.get(0);
 	}
 
 	@Override

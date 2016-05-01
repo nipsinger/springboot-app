@@ -44,7 +44,7 @@ public abstract class AbstractApiConsumer<T> {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	public final Class<T> getFetchedClass() {
 		return fetchedClazz;
 	}

@@ -1,26 +1,30 @@
 package at.noerd.sports.domain;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document
 public class League {
 
-	private int id;
+	@Id
+	private String id;
 	private String caption;
 	private int year;
 	private int numberOfTeams;
 	private int numberOfGames;
 	private DateTime lastUpdated;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

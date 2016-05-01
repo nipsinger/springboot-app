@@ -1,14 +1,19 @@
 package at.noerd.sports.domain;
 
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document
 public class Fixture {
 
+	@Id
+	private String id;
 	private DateTime date;
 	private Status status;
 	private int matchday;
@@ -16,6 +21,12 @@ public class Fixture {
 	private String awayTeamName;
 	private Result result;
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public DateTime getDate() {
 		return date;
 	}
@@ -66,7 +77,8 @@ public class Fixture {
 	      
 	      final Fixture other = (Fixture) obj;
 	      
-	      return Objects.equal(this.date, other.date)
+	      return Objects.equal(this.id, other.id)
+	    	  && Objects.equal(this.date, other.date)
 	          && Objects.equal(this.status, other.status)
 	          && Objects.equal(this.matchday, other.matchday)
 	          && Objects.equal(this.homeTeamName, other.homeTeamName)
@@ -76,7 +88,8 @@ public class Fixture {
 	
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this.getClass()).add("date", date)
+		return MoreObjects.toStringHelper(this.getClass()).add("id", id)
+				.add("date", date)
 				.add("status", status)
 				.add("matchday", matchday)
 				.add("homeTeamName", homeTeamName)

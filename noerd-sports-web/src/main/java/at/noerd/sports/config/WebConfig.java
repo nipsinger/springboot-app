@@ -1,6 +1,7 @@
 package at.noerd.sports.config;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 import at.noerd.sports.api.SoccerService;
+import at.noerd.sports.data.FixtureRepository;
+import at.noerd.sports.data.LeagueRepository;
+import at.noerd.sports.data.RankingRepository;
+import at.noerd.sports.data.TeamRepository;
 import at.noerd.sports.domain.League;
 import at.noerd.sports.interceptors.ApiKeyInterceptor;
 
@@ -25,17 +30,31 @@ public class WebConfig implements CommandLineRunner {
 	
 	@Autowired
 	private SoccerService soccerService;
-
+	@Autowired LeagueRepository leagueRepository;
+	@Autowired RankingRepository rankingRepository;
+	@Autowired TeamRepository teamRepository;
+	@Autowired FixtureRepository fixtureRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 
-		League league = soccerService.getLeague(395);
-		LOGGER.debug(league.toString());
+//		League league = soccerService.getLeague("395");
+//		LOGGER.debug(league.toString());
+//		
+		List<League> allLeagues = soccerService.getAllLeagues();
+		LOGGER.debug(allLeagues.toString());
 		
-//		List<League> allLeagues = soccerService.getAllLeagues();
-//		LOGGER.debug(allLeagues.toString());
-//
-//		League league = soccerService.getLeague(395);
+		leagueRepository.save(allLeagues);
+		
+		for(League league : allLeagues) {
+			LOGGER.debug(league.getId().toString());
+			teamRepository.save(soccerService.getAllTeamsForLeague(league));
+			rankingRepository.save(soccerService.getRankingForLeague(league).getStanding());
+			fixtureRepository.save(soccerService.getFixturesForLeague(league).getFixtures());
+		}
+		
+		
+		//		League league = soccerService.getLeague(395);
 //		LOGGER.debug(league.toString());
 //
 //		List<Team> teams = soccerService.getAllTeamsForLeague(league);
@@ -60,5 +79,4 @@ public class WebConfig implements CommandLineRunner {
 		restTemplate.setInterceptors(Collections.singletonList(new ApiKeyInterceptor()));
 		return restTemplate;
 	}
-	
 }
